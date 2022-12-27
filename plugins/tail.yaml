@@ -1,0 +1,63 @@
+apiVersion: krew.googlecontainertools.github.com/v1alpha2
+kind: Plugin
+metadata:
+  name: tail
+spec:
+  version: v0.16.0
+  platforms:
+    - bin: kail
+      uri: https://github.com/chandanpasunoori/kail/releases/download/v0.16.0/kail_0.16.0_linux_armv6.tar.gz
+      sha256: 39db21d922358d856499aac5bca25222637e6e4d2d8f86f69f94053fe439de02
+      selector:
+        matchLabels:
+          os: linux
+          arch: arm
+    - bin: kail
+      uri: https://github.com/chandanpasunoori/kail/releases/download/v0.16.0/kail_0.16.0_linux_arm64.tar.gz
+      sha256: 29e60df9f1086dcb474b416a25fac80aa5065221cbf8d9c8f8ede6d54ac5901b
+      selector:
+        matchLabels:
+          os: linux
+          arch: arm64
+    - bin: kail
+      uri: https://github.com/chandanpasunoori/kail/releases/download/v0.16.0/kail_0.16.0_linux_amd64v2.tar.gz
+      sha256: 3b20ddc5e3b91ee03bd36d6f2473305ed9243e974d0a7a609f58d30a68b803f1
+      selector:
+        matchLabels:
+          os: linux
+          arch: amd64
+    - bin: kail
+      uri: https://github.com/chandanpasunoori/kail/releases/download/v0.16.0/kail_0.16.0_darwin_arm64.tar.gz
+      sha256: 7dccdfffebd2b5917a1335109bf05b6268979803193ed9be1aadd8a91452c75b
+      selector:
+        matchLabels:
+          os: darwin
+          arch: arm64
+    - bin: kail
+      uri: https://github.com/chandanpasunoori/kail/releases/download/v0.16.0/kail_0.16.0_darwin_amd64v2.tar.gz
+      sha256: d3d41ddd700cd99daede4b01080550493def12f26b8954be9e22566073359756
+      selector:
+        matchLabels:
+          os: darwin
+          arch: amd64
+  shortDescription: Stream logs from multiple pods and containers using simple, dynamic source selection.
+  homepage: https://github.com/chandanpasunoori/kail
+  description: |-
+    Kail https://github.com/chandanpasunoori/kail - "Just show me the logs"
+    Stream logs from all matched containers of all matched pods.  Match pods by service,
+    replicaset, deployment, and others.  Adjusts to a changing cluster - pods are
+    added and removed from logging as they fall in or out of the selection.
+    Documentation:
+      See https://github.com/chandanpasunoori/kail or
+      $ kubectl tail --help
+    Usage:
+      # match all pods
+      $ kubectl tail
+      # match pods in the 'frontend' namespace
+      $ kubectl tail --ns staging
+      # match pods belonging to a replicaset named 'workers' in any namespace.
+      $ kubectl tail --rs workers
+      # match pods belonging to the replicaset named 'workers' only in the 'staging' namespace
+      $ kubectl tail --rs staging/workers
+      # match pods belonging to both the service "frontend" and the deployment "webapp"
+      $ kubectl tail --svc frontend --deploy webapp
